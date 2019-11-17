@@ -27,6 +27,32 @@ Array.from(like).forEach(function(element) {
       });
 });
 
+Array.from(dislike).forEach(function(element) {
+      element.addEventListener('click', function(){
+        var name = this.parentNode.parentNode.childNodes[1].innerText
+        const msg = this.parentNode.parentNode.childNodes[3].innerText
+        const like = parseFloat(this.parentNode.parentNode.childNodes[5].innerText)
+        const dislike = parseFloat(this.parentNode.parentNode.childNodes[9].innerText)
+        fetch('talk2', {
+          method: 'put',
+          headers: {'Content-Type': 'application/json'},
+          body: JSON.stringify({
+            'team': name,
+            'like': like,
+            'dislike': dislike,
+          })
+        })
+        .then(response => {
+          if (response.ok) return response.json()
+        })
+        .then(data => {
+          console.log(data)
+          window.location.reload(true)
+        })
+      });
+});
+
+
 Array.from(trash).forEach(function(element) {
       element.addEventListener('click', function(){
         const name = this.parentNode.parentNode.childNodes[1].innerText
