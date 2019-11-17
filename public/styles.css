@@ -1,0 +1,37 @@
+*{
+  box-sizing: border-box;
+}
+html{
+  font-size: 10px;
+}
+body{
+  background-image: url("nba.jpeg");
+  background-size: 100%;
+
+}
+h1{
+  font-size: 4rem;
+  text-align: center;
+  color: white;
+  padding-top: 2%;
+}
+li{
+  text-align: center;
+  list-style: none;
+  font-size: 2rem;
+  font-weight: bold;
+  color: #ff4e4e;
+}
+h2{
+  text-align: center;
+  font-size: 2rem;
+  color: #95b1ff;
+}
+h3{
+  font-size: 3rem;
+  text-align: center;
+  color: white;
+}
+form{
+  margin-left: 43%;
+}
