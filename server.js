@@ -31,18 +31,46 @@ app.get('/', (req, res) => {
 })
 
 app.post('/talk', (req, res) => {
-  db.collection('Thread').save({team: req.body.team, like: 0, dislike: 0}, (err, result) => {
+  db.collection('Thread').save({team: req.body.team, like: 0}, (err, result) => {
     if (err) return console.log(err)
     console.log('saved to database')
     res.redirect('/')
   })
 })
 
+
+
+app.post('/talk2', (req, res) => {
+  db.collection('Thread').save({team: req.body.team, dislike: 0}, (err, result) => {
+    if (err) return console.log(err)
+    console.log('saved to database')
+    res.redirect('/')
+  })
+})
+
+
+
 app.put('/talk', (req, res) => {
   db.collection('Thread')
   .findOneAndUpdate({team: req.body.team}, {
     $set: {
       like:req.body.like + 1,
+    }
+  }, {
+    sort: {_id: -1},
+    upsert: true
+  }, (err, result) => {
+    if (err) return res.send(err)
+    res.send(result)
+  })
+})
+
+
+
+app.put('/talk2', (req, res) => {
+  db.collection('Thread')
+  .findOneAndUpdate({team: req.body.team}, {
+    $set: {
       dislike:req.body.dislike + 1
     }
   }, {
@@ -53,6 +81,8 @@ app.put('/talk', (req, res) => {
     res.send(result)
   })
 })
+
+
 
 
 app.delete('/talk', (req, res) => {
